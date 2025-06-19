@@ -1,0 +1,160 @@
+/* General Container */
+.container {
+  text-align: center;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 0;
+}
+
+/* Loading Screen */
+.loading-screen {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(to bottom, #28063c, #2A122A);
+  color: white;
+  width: 100%;  /* Ensures it takes full width */
+}
+
+.loading-content {
+  text-align: center;
+  width: 100%; /* Ensures content spans full width */
+}
+
+.loading-logo {
+  width: 100px; /* Increased size for better visibility */
+  height: auto;
+  margin-bottom: 20px;
+}
+
+.loading-heading {
+  font-size: 2.5rem;
+  font-weight: bold;
+  margin-bottom: 20px;
+  color: white;
+}
+
+.spinner {
+  margin-bottom: 20px;
+}
+
+/* Jump animation for spinner */
+.jump-animation {
+  animation: jump 0.5s ease-in-out infinite;
+}
+
+@keyframes jump {
+  0% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px); /* Makes the circle jump */
+  }
+  100% {
+    transform: translateY(0);
+  }
+}
+
+/* Progress Bar Container */
+.progress-bar-container {
+  width: 80%; /* Full width for progress bar container */
+  max-width: 80%; /* Optional max width for better control */
+  height: 15px;
+  background-color: #ddd;
+  border-radius: 10px;
+  margin: 15px auto;
+}
+
+/* Progress Bar */
+.progress-bar {
+  height: 100%;
+  background-color: #4caf50; /* Green color for progress */
+  border-radius: 10px;
+  transition: width 0.3s ease;
+}
+
+/* Loading Footer */
+.loading-footer {
+  font-size: 1.2rem;
+  font-weight: lighter;
+  margin-top: 20px;
+  color: white;
+}
+
+/* Fallback Message */
+.fallback-message {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  height: 100%;
+  color: white;
+  background-color: #2A122A;
+   /* Pink background color */
+  padding: 20px;
+  width: 100%; /* Full width */
+  box-sizing: border-box; /* Include padding in the width calculation */
+}
+
+/* Text for fallback message with white color */
+.fallback-text {
+  font-size: 1.2rem;
+  color: white; /* White text color */
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+/* Button for downloading the file */
+.download-btn {
+  background-color:#8A1538 ;
+  color: white;
+  padding: 12px 24px;
+  border-radius: 30px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.3s ease;
+  text-transform: uppercase;
+  width: 100%; /* Full width for button */
+  max-width: 300px; /* Optional: limit button width */
+}
+
+.download-btn:hover {
+  background-color: #ca83dd;
+  color: white;
+  transform: scale(1.05); /* Slight scaling effect on hover */
+}
+
+.download-btn:focus {
+  outline: none;
+}
+
+/* Styles for the PDF object and container */
+object {
+  width: 100%; /* Ensure full width for embedded PDF */
+  height: auto;
+  margin: 0 auto;
+}
+
+@media (max-width: 900px) {
+  /* For mobile devices, ensure the PDF fits properly */
+  object {
+    height: 100vh; /* Full-screen height for mobile */
+  }
+}
+:host {
+  display: flex;
+  flex-direction: column;
+  height: 100vh; /* Full viewport height */
+}
+
+object {
+  flex-grow: 1;
+  height: 100%;
+}
+.pdf-container {
+  width: 100%;
+  height: 100vh; /* Full viewport height */
+  display: flex;
+}

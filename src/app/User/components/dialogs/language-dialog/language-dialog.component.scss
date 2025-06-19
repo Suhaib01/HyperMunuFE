@@ -1,0 +1,43 @@
+.language-dialog-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Background overlay */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+}
+
+.language-dialog {
+  background-color: #2A122A;
+  padding: 20px;
+  border-radius: 8px;
+  width: 250px;
+  text-align: center;
+}
+
+.language-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.language-list li {
+  padding: 10px;
+  cursor: pointer;
+  text-align: center;
+  background-color: #8A1538;
+  margin-bottom: 10px;
+  border-radius: 4px;
+}
+
+.language-list li:hover {
+  background-color: #9E1F4D;
+}
+
+.language-list li:last-child {
+  margin-bottom: 0;
+}

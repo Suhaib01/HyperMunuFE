@@ -1,0 +1,89 @@
+
+
+<div *ngIf="!isFromAdmin">
+  <ng-container *ngIf="isFileLoaded; else loading">
+    <div  class="min-h-screen bg-[#2A122A] flex flex-col px-6 pt-8">
+      <!-- Header with Logo -->
+      <div class="w-full flex justify-end mb-8">
+        <a href="main/{{tableId}}" class="text-white font-arabic flex items-center">
+          <div class="relative">
+            <img src="assets/img/KTLogo.svg" alt="KTome Logo" class="w-[300px] h-[68px] object-contain KtLogo" />
+            <img src="assets/img/HM.svg" alt="HyperMenu Logo" class="w-[65px] h-[20px] object-contain ml-16 HMLogo absolute bottom-0 left-0 ml-20" />
+          </div>
+        </a>
+        <div>
+          <button class="text-white font-arabic mr-1">
+            <div *ngIf="selectedLanguage">
+              {{ selectedLanguage }}
+            </div>  
+          </button>
+          <app-language-dialog></app-language-dialog>
+        </div>
+      </div>
+      
+        <!-- Display PDF when it's loaded -->
+        <object
+      *ngIf="filePath"
+      [data]="filePath"
+      type="application/pdf"
+      width="100%"
+      [style.height]="'550px'"
+      style="border: none;"
+      (error)="onPdfError()">
+      
+      <div class="fallback-message" [dir]="selectedLanguage === 'ar' ? 'rtl' : 'ltr'">
+        <h1 class="mb-16">
+          {{ selectedLanguage === 'ar' ? 'عذرًا !!' : 'OPPS !!' }}
+        </h1>
+        <br><br>
+        <p class="fallback-text">
+          {{ selectedLanguage === 'ar' ? 'متصفحك لا يدعم ملفات PDF المضمنة.' : 'Your browser does not support embedded PDFs.' }}
+        </p>
+        <br><br><br><br>
+        <a [href]="fullPath" download>
+          <button class="download-btn font-bold">
+            {{ selectedLanguage === 'ar' ? 'تحميل الملف' : 'Download the file' }}
+          </button>
+        </a>
+      </div>
+    </object>
+    
+     
+    
+      <!-- Loading State: Display the main-loader while loading -->
+    
+    </div>
+    </ng-container>
+    <ng-template #loading>
+      <app-main-loader [progress]="progress"></app-main-loader>
+    </ng-template>
+</div>
+<div *ngIf="isFromAdmin">
+  <object
+      *ngIf="filePath"
+      [data]="filePath"
+      type="application/pdf"
+      width="100%"
+      [style.height]="'800px'"
+      style="border: none;"
+      (error)="onPdfError()">
+      
+      <div class="fallback-message" [dir]="selectedLanguage === 'ar' ? 'rtl' : 'ltr'">
+        <h1 class="mb-16">
+          {{ selectedLanguage === 'ar' ? 'عذرًا !!' : 'OPPS !!' }}
+        </h1>
+        <br><br>
+        <p class="fallback-text">
+          {{ selectedLanguage === 'ar' ? 'متصفحك لا يدعم ملفات PDF المضمنة.' : 'Your browser does not support embedded PDFs.' }}
+        </p>
+        <br><br><br><br>
+        <a [href]="fullPath" download>
+          <button class="download-btn font-bold">
+            {{ selectedLanguage === 'ar' ? 'تحميل الملف' : 'Download the file' }}
+          </button>
+        </a>
+      </div>
+    </object>
+  
+  
+</div>

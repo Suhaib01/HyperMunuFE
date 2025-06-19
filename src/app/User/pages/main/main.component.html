@@ -1,0 +1,61 @@
+<div class="min-h-screen bg-[#2A122A] flex flex-col items-center px-6 pt-4">
+  <!-- Top Bar -->
+  <div class="w-full flex justify-between items-center mb-4 mt-4 px-4">
+    
+
+    <!-- Language Button + Dialog (Right, inside each other) -->
+    <div>
+      <button class="text-white font-arabic" (click)="openLanguageDialog()">
+        <div *ngIf="selectedLanguage" class="mr-2">
+          {{ selectedLanguage }}
+        </div>  
+      </button>
+      <app-language-dialog></app-language-dialog>
+    </div>
+
+  </div>
+
+  <!-- Logo Area -->
+  <div class="flex flex-col items-center justify-center flex-grow">
+    <div class="relative md:w-40 md:h-40">
+      <!-- First Logo -->
+      <!-- Second Logo (Layered Below) -->
+      <img
+        src="assets/img/HM1.svg"
+        alt="HyperMenu Logo"
+        class="w-[125px] h-[41px] object-contain mb-3 HMLogo absolute bottom-0 left-0 ml-10">
+    </div>
+  </div>
+
+  <!-- Arabic Buttons -->
+  <div *ngIf="selectedLanguage == 'ar'" class="w-full space-y-4 mb-12 px-6">
+    <div class="flex w-full space-y-4 flex-col">
+      <button (click)="viewMenu()"
+        class="menuBtn w-full py-3 px-6 rounded-lg font-arabic hover:bg-[#EC2F2F] font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+        القائمة
+      </button>
+
+    </div>
+  </div>
+
+  <!-- Arabic Footer -->
+  <a *ngIf="selectedLanguage == 'ar'" href="" class="text-gray-400 text-sm text-center font-arabic mt-auto pb-6">
+    فانك توافق على <span class="text-[#8A1538]">الشروط والاحكام</span> HyperMenu باستخدام
+  </a>
+
+  <!-- English Buttons -->
+  <div *ngIf="selectedLanguage == 'en'" class="w-full space-y-4 mb-12 px-6">
+    <div class="flex w-full space-y-4 flex-col">
+      <button (click)="viewMenu()"
+        class="menuBtn w-full py-3 px-6 rounded-lg font-arabic hover:bg-[#EC2F2F] font-bold transition-all duration-300 transform hover:scale-105 hover:shadow-xl">
+        Menu
+      </button>
+
+    </div>
+  </div>
+
+  <!-- English Footer -->
+  <a *ngIf="selectedLanguage == 'en'" href="" class="text-gray-400 text-sm text-center font-arabic mt-auto pb-6">
+    By using Hyper Menu you agree to the <span class="text-[#8A1538]">terms and conditions.</span> 
+  </a>
+</div>

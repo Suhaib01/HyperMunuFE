@@ -1,0 +1,75 @@
+<div class="text-gray-800 font-inter">
+    <!-- Sidebar -->
+    <div 
+      class="fixed left-0 top-0 w-64 h-full bg-[#2A122A] p-4 z-50 sidebar-menu transition-transform duration-300"
+      [ngClass]="{'-translate-x-full': !isSidebarOpen, 'translate-x-0': isSidebarOpen, 'md:translate-x-0': true}"
+    >
+      <a  class="flex items-center pb-4 border-b border-b-gray-500">
+        <span class="text-lg font-bold text-white ml-3">
+          <img src="/assets/images/logos/Layer_1.svg" alt="" class="rounded object-cover">
+        </span>
+      </a>
+      <ul class="mt-4">
+        <li class="mb-1 group" *ngFor="let item of menuItems">
+          <a 
+            [routerLink]="item.link" 
+            [ngClass]="{'bg-[#8A1538] text-white': activeLink === item.link}" 
+            class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#8A1538] hover:text-white rounded-md"
+            (click)="setActive(item.link); closeSidebar()"
+          >
+            <i class="{{ item.icon }} mr-3 text-lg"></i>
+            <span class="text-sm">{{ item.label }}</span>
+          </a>
+        </li>
+        <li class="mb-1 group">
+          <a 
+            (click)="signout($event)" 
+            class="flex items-center py-2 px-4 text-gray-300 hover:bg-[#8A1538] hover:text-white rounded-md cursor-pointer"
+          >
+            <i class="ri-logout-box-line mr-3 text-lg"></i>
+            <span class="text-sm">Sign Out</span>
+          </a>
+        </li>
+      </ul>
+    </div>
+  
+    <!-- Sidebar Overlay (Mobile) -->
+    <div 
+      class="fixed top-0 left-0 w-full h-full bg-black/50 z-40 md:hidden transition-opacity duration-300"
+      *ngIf="isSidebarOpen"
+      (click)="closeSidebar()"
+    ></div>
+  
+    <!-- Main Content -->
+    <main class="w-full md:w-[calc(100%-256px)] md:ml-64 bg-gray-200 min-h-screen transition-all">
+      <!-- Header -->
+      <div class="py-2 px-6 bg-white flex items-center shadow-md shadow-black/5 sticky top-0 left-0 z-30">
+        
+        <!-- Sidebar Toggle Button (Now Inside Header) -->
+        <button 
+          class="md:hidden text-gray-600 mr-4 p-2 rounded hover:bg-gray-100"
+          (click)="toggleSidebar()"
+        >
+          <i class="ri-menu-line text-xl">👁️</i>
+        </button>
+  
+        <ul class="flex items-center text-sm">
+          <li class="mr-2">
+            <a href="#" class="text-gray-600 font-medium">{{email}}</a>
+          </li>
+        </ul>
+        
+        <ul class="ml-auto flex items-center">
+        
+          <li class="dropdown ml-3">
+            <button type="button" class="dropdown-toggle flex items-center">
+              <img src="/assets/images/user.png" alt="" class="w-8 h-8 rounded block object-cover">
+            </button>
+          </li>
+        </ul>
+      </div>
+  
+      <router-outlet></router-outlet>
+    </main>
+  </div>
+  

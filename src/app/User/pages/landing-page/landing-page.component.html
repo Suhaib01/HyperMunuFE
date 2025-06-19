@@ -1,0 +1,173 @@
+<header class="fixed top-0 left-0 w-full z-50 bg-white/90 backdrop-blur-md shadow-md">
+  <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center">
+    <div class="text-2xl font-bold text-[#8A1538]">HyperMenu</div>
+
+    <!-- Mobile Menu Button -->
+    <button (click)="toggleMenu()" class="lg:hidden text-[#8A1538] focus:outline-none">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 8h16M4 16h16"/>
+      </svg>
+    </button>
+
+    <!-- Navigation Menu -->
+    <nav
+      [ngClass]="{'hidden': !menuOpen, 'flex': menuOpen, 'lg:flex': true}"
+      class="flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-6 text-sm font-medium text-gray-700 absolute lg:static top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent px-6 py-4 lg:p-0 shadow-md lg:shadow-none"
+    >
+      <a routerLink="/" class="hover:text-[#8A1538] transition">Home</a>
+      <a routerLink="/#features" class="hover:text-[#8A1538] transition">Features</a>
+      <a routerLink="/#how" class="hover:text-[#8A1538] transition">How It Works</a>
+      <a routerLink="/#pricing" class="hover:text-[#8A1538] transition">Pricing</a>
+      <a routerLink="/#faq" class="hover:text-[#8A1538] transition">FAQs</a>
+            <a href="Auth/login"
+         class="border-1 border-[#8A1538] text-[#8A1538] px-4 py-2 rounded-lg  transition text-center">Login</a>
+      <a href="Auth/register"
+         class="bg-[#8A1538] text-white px-4 py-2 rounded-lg hover:bg-[#74122F] transition text-center">Get
+        Started</a>
+    </nav>
+  </div>
+</header>
+
+<!-- Spacer -->
+<div class="h-20"></div>
+
+
+<!-- Spacer to prevent content hiding behind fixed header -->
+<div class="h-20"></div>
+
+<!-- Hero Section with Enhanced Animations -->
+<section class="min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center text-center px-4 py-24 relative overflow-hidden" style="background-image: url('assets/images/hero-bg.jpg');">
+  <div class="absolute inset-0 bg-gradient-to-br from-[#8A1538]/90 to-[#74122F]/90 z-0 animate-fade-in"></div>
+  <div class="relative z-10 text-white max-w-2xl animate-slide-up delay-100">
+    <h1 class="text-6xl font-extrabold mb-4 tracking-tight drop-shadow-md">HyperMenu</h1>
+    <p class="text-2xl mb-6 text-white/90">Smart QR Menus for Smart Restaurants</p>
+    <a href="Auth/register" class="bg-white text-[#8A1538] hover:text-[#74122F] px-6 py-3 rounded-xl font-semibold transition-transform hover:scale-105 shadow-lg">Explore Features</a>
+  </div>
+</section>
+
+<!-- About Section -->
+<section class="bg-white py-20 px-6 text-center animate-fade-in">
+  <h2 class="text-4xl font-bold mb-6">About Us</h2>
+  <p class="max-w-3xl mx-auto text-gray-600 text-lg">HyperMenu is a modern digital solution to manage restaurant menus, branches, and customer orders through smart QR codes.</p>
+</section>
+
+<!-- Features Section -->
+<section id="features" class="bg-gray-50 py-20 px-6">
+  <h2 class="text-4xl font-bold text-center mb-14">Product Features</h2>
+  <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-transform hover:scale-105">
+      <h3 class="text-2xl font-semibold mb-3">QR Code Generator</h3>
+      <p class="text-gray-600">Each branch gets a unique QR code linked to its digital menu.</p>
+    </div>
+    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-transform hover:scale-105">
+      <h3 class="text-2xl font-semibold mb-3">Branch Management</h3>
+      <p class="text-gray-600">Easily add, edit, and manage multiple locations.</p>
+    </div>
+    <div class="bg-white p-8 rounded-2xl shadow-md hover:shadow-xl transition-transform hover:scale-105">
+      <h3 class="text-2xl font-semibold mb-3">Live Orders</h3>
+      <p class="text-gray-600">Customers order directly from their phones – no app needed!</p>
+    </div>
+  </div>
+</section>
+
+<!-- How It Works -->
+<section id="how" class="bg-white py-20 px-6">
+  <h2 class="text-4xl font-bold text-center mb-14">How It Works</h2>
+  <div class="max-w-5xl mx-auto grid md:grid-cols-3 gap-10 text-center">
+    <div class="animate-fade-in delay-100">
+      <div class="text-5xl mb-4">📸</div>
+      <h3 class="font-semibold text-xl">Scan</h3>
+      <p class="text-gray-600">Customers scan the QR code using their phone.</p>
+    </div>
+    <div class="animate-fade-in delay-200">
+      <div class="text-5xl mb-4">📋</div>
+      <h3 class="font-semibold text-xl">Browse</h3>
+      <p class="text-gray-600">Menus load instantly with images and prices.</p>
+    </div>
+    <div class="animate-fade-in delay-300">
+      <div class="text-5xl mb-4">🛒</div>
+      <h3 class="font-semibold text-xl">Order</h3>
+      <p class="text-gray-600">Place orders instantly without needing staff.</p>
+    </div>
+  </div>
+</section>
+
+<!-- App Preview -->
+<section class="bg-gray-100 py-20 px-6 text-center animate-fade-in">
+  <h2 class="text-4xl font-bold mb-10">App Preview</h2>
+  <img src="assets/demo.png" alt="App Screenshot" class="mx-auto rounded-2xl shadow-xl w-full max-w-2xl">
+</section>
+
+<!-- Pricing Section -->
+<section id="pricing" class="bg-white py-20 px-6 text-center">
+  <h2 class="text-4xl font-bold mb-10">Pricing Plans</h2>
+  <div class="grid md:grid-cols-3 gap-10 max-w-6xl mx-auto">
+    <div class="bg-gray-50 p-8 rounded-2xl shadow-md">
+      <h3 class="text-2xl font-bold mb-2">Starter</h3>
+      <p class="text-2xl font-semibold mb-4">$9/mo</p>
+      <ul class="text-gray-600 space-y-2">
+        <li>1 Branch</li>
+        <li>Up to 10 Tables</li>
+        <li>Email Support</li>
+      </ul>
+    </div>
+    <div class="bg-yellow-100 p-8 rounded-2xl shadow-md border-2 border-yellow-400">
+      <h3 class="text-2xl font-bold mb-2">Pro</h3>
+      <p class="text-2xl font-semibold mb-4">$29/mo</p>
+      <ul class="text-gray-600 space-y-2">
+        <li>Up to 5 Branches</li>
+        <li>Unlimited Tables</li>
+        <li>Priority Support</li>
+      </ul>
+    </div>
+    <div class="bg-gray-50 p-8 rounded-2xl shadow-md">
+      <h3 class="text-2xl font-bold mb-2">Enterprise</h3>
+      <p class="text-2xl font-semibold mb-4">Custom</p>
+      <ul class="text-gray-600 space-y-2">
+        <li>Unlimited Branches</li>
+        <li>White Label</li>
+        <li>Dedicated Support</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="bg-gray-50 py-20 px-6 text-center">
+  <h2 class="text-4xl font-bold mb-10">What Our Clients Say</h2>
+  <blockquote class="max-w-2xl mx-auto text-gray-700 italic text-lg">"HyperMenu made our restaurant 100% paperless. Customers love it!"</blockquote>
+  <p class="mt-4 text-sm text-gray-500">– Restaurant Owner, Amman</p>
+</section>
+
+<!-- FAQ -->
+<section id="faq" class="bg-white py-20 px-6">
+  <h2 class="text-4xl font-bold text-center mb-10">FAQs</h2>
+  <div class="max-w-3xl mx-auto space-y-8">
+    <div>
+      <h3 class="font-semibold text-lg">Do I need special hardware?</h3>
+      <p class="text-gray-600">No, just print your branch's QR code and place it on tables.</p>
+    </div>
+    <div>
+      <h3 class="font-semibold text-lg">Can I manage multiple branches?</h3>
+      <p class="text-gray-600">Yes! Our admin panel gives you full control.</p>
+    </div>
+  </div>
+</section>
+
+<!-- CTA Section -->
+<section class="bg-gradient-to-r from-[#8A1538] to-[#74122F] text-white text-center py-20 px-6">
+  <h2 class="text-4xl font-bold mb-6">Ready to Transform Your Restaurant?</h2>
+  <p class="mb-8 text-lg">Start your free trial or request a live demo today.</p>
+  <a href="/auth/register" class="bg-white text-[#8A1538] px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition">Get Started</a>
+</section>
+
+<!-- Footer -->
+<footer class="bg-black text-gray-400 py-10 text-center text-sm">
+  <p>&copy; 2025 HyperMenu. All rights reserved.</p>
+  <div class="mt-4 space-x-6">
+    <a href="#" class="hover:text-white">Privacy</a>
+    <a href="#" class="hover:text-white">Terms</a>
+    <a href="mailto:info@hypermenu.com" class="hover:text-white">Contact</a>
+  </div>
+</footer>

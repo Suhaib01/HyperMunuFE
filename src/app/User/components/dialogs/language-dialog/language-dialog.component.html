@@ -1,0 +1,26 @@
+<!-- 🌍 Language Icon Button -->
+<button class="" (click)="openDialog()">
+  <i class="fas fa-globe text-white"></i>
+</button>
+
+<!-- 🌍 Language Selection Dialog -->
+<div *ngIf="isDialogOpen" class="fixed inset-0 bg-black/50 flex items-center justify-center z-50" (click)="closeDialog()">
+  <div class="bg-white/10 backdrop-blur-lg p-6 rounded-xl shadow-xl w-[90%] max-w-sm border border-white/20"
+       (click)="$event.stopPropagation()">
+    
+    <h3 class="text-white text-center text-2xl font-bold mb-4">🌎 Select Language</h3>
+
+    <ul class="space-y-3 text-center">
+      <li class="py-3 bg-gradient-to-r from-[#36D1DC] to-[#5B86E5] text-white rounded-lg cursor-pointer 
+                 hover:scale-105 transition-transform duration-300 font-semibold text-lg"
+          (click)="selectLanguage('en')">
+        🇬🇧 English
+      </li>
+      <li class="py-3 bg-gradient-to-r from-[#FF512F] to-[#DD2476] text-white rounded-lg cursor-pointer 
+                 hover:scale-105 transition-transform duration-300 font-semibold text-lg"
+          (click)="selectLanguage('ar')">
+        🇸🇦 Arabic
+      </li>
+    </ul>
+  </div>
+</div>

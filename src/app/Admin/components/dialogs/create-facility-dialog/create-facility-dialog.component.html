@@ -1,0 +1,61 @@
+<div class="bg-white p-8 rounded-lg shadow-lg max-w-sm w-full text-center">
+  <!-- Title -->
+  <h2 class="text-xl font-semibold text-gray-800 mb-6">Create New Facility</h2>
+
+  <!-- Form Start -->
+  <form [formGroup]="facilityForm" (ngSubmit)="onSubmit()">
+    
+    <!-- Facility Name Field -->
+    <div class="w-full mb-6">
+      <label for="name" class="text-gray-700 text-left block mb-2">Facility Name</label>
+      <input
+        type="text"
+        id="name"
+        formControlName="name"
+        placeholder="Enter facility name"
+        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      />
+      <div *ngIf="facilityForm.get('name')?.hasError('required')" class="text-red-500 text-sm mt-1">
+        Name is required
+      </div>
+      <div *ngIf="facilityForm.get('name')?.hasError('maxlength')" class="text-red-500 text-sm mt-1">
+        Name cannot exceed 100 characters
+      </div>
+    </div>
+
+    <!-- Facility Type Field -->
+    <div class="w-full mb-6">
+      <label for="type" class="text-gray-700 text-left block mb-2">Facility Type</label>
+      <select
+        id="type"
+        formControlName="type"
+        class="w-full p-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-indigo-500"
+      >
+        <option value="food-shop">Food Shop</option>
+        <option value="sweet-shop">Sweet Shop</option>
+        <option value="coffee-shop">Coffee Shop</option>
+      </select>
+      <div *ngIf="facilityForm.get('type')?.hasError('required')" class="text-red-500 text-sm mt-1">
+        Type is required
+      </div>
+    </div>
+
+    <!-- Dialog Buttons -->
+    <div class="flex justify-center space-x-6 mt-8">
+      <button
+        type="button"
+        (click)="onClose()"
+        class="px-5 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition"
+      >
+        Cancel
+      </button>
+      <button
+        type="submit"
+        [disabled]="facilityForm.invalid"
+        class="px-5 py-2 bg-[#8A1538] text-white rounded-lg hover:bg-[#2A122A] transition"
+      >
+        Create Facility
+      </button>
+    </div>
+  </form>
+</div>

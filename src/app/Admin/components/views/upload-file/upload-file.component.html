@@ -1,0 +1,42 @@
+<div class="upload-container">
+  <div 
+    class="drag-drop-box"
+    [class.drag-over]="isDragOver"
+    (dragover)="onDragOver($event)"
+    (dragleave)="onDragLeave($event)"
+    (drop)="onDrop($event)">
+    
+    <label class="upload-content" [for]="'fileInput'" [hidden]="fileUploaded">
+      <span class="material-icons upload-icon">upload-menu</span>
+      <p><strong>Click here</strong> or drag your file to upload</p>
+      <span class="upload-hint">Supports: PDF</span>
+    </label>
+
+    <p *ngIf="fileUploaded" class="upload-content">
+      <span class="material-icons">check_circle</span>
+      {{ "The " + fileName + " File is your menu now." }}
+    </p>
+
+    <!-- Hidden File Input -->
+    <input
+      id="fileInput"
+      type="file"
+      class="file-input hidden"
+      (change)="onFileSelected($event)"
+      [disabled]="fileUploaded"
+      accept="application/pdf"
+    />
+  </div>
+
+  <!-- Progress Bar -->
+  <div *ngIf="uploading" class="progress-bar">
+    <div class="progress" [style.width.%]="uploadProgress"></div>
+  </div>
+
+  <!-- Actions -->
+  <div *ngIf="fileUploaded" class="actions">
+    <button type="button" (click)="deleteFile()">
+      <span class="material-icons"></span> Done
+    </button>
+  </div>
+</div>
