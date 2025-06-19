@@ -22,7 +22,7 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./branches.component.scss']
 })
 export class BranchesComponent implements OnInit {
-  backendUrl : string = environment.API_QR_URL
+  backendUrl : string = 'https://hypermenuapi-2.onrender.com'
   branches: any[] = [];
   isLoading: boolean = true;
   facilityId: string | null = null;
