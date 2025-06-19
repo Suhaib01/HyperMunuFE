@@ -15,7 +15,7 @@ import { MatDialog } from '@angular/material/dialog';
 export class DashboardComponent {
   facilities: any[] = [];
   isLoading: boolean = true;
-  backendBaseUrl : string = 'https://hypermenuapi-2.onrender.com'
+
  constructor(private facilityService: FacilitiesService, private router : Router,private dialog: MatDialog) {}
 ngOnInit(): void {
     this.fetchFacilities();

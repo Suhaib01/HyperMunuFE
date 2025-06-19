@@ -22,7 +22,6 @@ import { environment } from '../../../environments/environment';
   styleUrls: ['./branches.component.scss']
 })
 export class BranchesComponent implements OnInit {
-  backendUrl : string = 'https://hypermenuapi-2.onrender.com'
   branches: any[] = [];
   isLoading: boolean = true;
   facilityId: string | null = null;
@@ -125,7 +124,7 @@ export class BranchesComponent implements OnInit {
   }
 printQRCode(branch: any): void {
   const qrImage = new Image();
-  qrImage.src = `${this.backendUrl}/${branch.qrCodeUrl}`;
+  qrImage.src = `${branch.qrCodeUrl}`;
 
   qrImage.onload = () => {
     const printWindow = window.open('', '_blank', 'width=1200,height=1200');

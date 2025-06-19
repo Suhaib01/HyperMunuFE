@@ -63,7 +63,7 @@
             <div *ngIf="branch.qrCodeUrl" class="mt-4 text-center">
               <p class="text-sm font-semibold text-gray-700">QR to view menu:</p>
               <img *ngIf="branch.qrCodeUrl"
-                   [src]="backendUrl + '/' + branch.qrCodeUrl"
+                   [src]="branch.qrCodeUrl"
                    alt="QR Code"
                    class="w-64 h-64 mt-2 mx-auto rounded-md border border-gray-300" />
             </div>
