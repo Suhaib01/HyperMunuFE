@@ -31,7 +31,7 @@
                 "input": "public"
               },
               {
-                "glob": "_redirects",
+                "glob": "static.json",
                 "input": "src",
                 "output": "/"
               }
