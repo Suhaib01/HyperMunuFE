@@ -11,6 +11,10 @@ import { UploadFileComponent } from './Admin/components/views/upload-file/upload
 import { ViewMenuComponent } from './Admin/components/views/view-menu/view-menu.component';
 import { LandingPageComponent } from './User/pages/landing-page/landing-page.component';
 import { MainComponent } from './User/pages/main/main.component';
+import { AdminDashboardComponent } from './SuperAdmin/admin-dashboard/admin-dashboard.component';
+import { superAdminGuard } from '../guards/super-admin.guard';
+import { PrivacyPolicyComponent } from './User/pages/privacy-policy/privacy-policy.component';
+import { TermsConditionsComponent } from './User/pages/terms-conditions/terms-conditions.component';
 
 export const routes: Routes = [  
   {path: 'Auth',
@@ -21,8 +25,9 @@ export const routes: Routes = [
 
   ]},
 {path: 'home',component: LandingPageComponent},
-
-
+{path:"privacy-policy" , component: PrivacyPolicyComponent},
+{path:"terms-and-conditions" , component: TermsConditionsComponent},
+    
 {path: 'Home',
    canActivate: [authGuard , adminGuard],
   component: ContainerComponent,
@@ -33,7 +38,15 @@ export const routes: Routes = [
   { path: ':branchId/uploadMenu', component: UploadFileComponent},
   { path: ':branchId/viewMenu', component: ViewMenuComponent },
   ]
+},
+{
+  path: 'Admin',
+  canActivate : [authGuard, superAdminGuard],
+  component:ContainerComponent,
 
+  children:[
+    {path:'dashboard', component:AdminDashboardComponent}
+  ]
 
 },
   {

@@ -5,51 +5,47 @@
     <!-- Mobile Menu Button -->
     <button (click)="toggleMenu()" class="lg:hidden text-[#8A1538] focus:outline-none">
       <svg xmlns="http://www.w3.org/2000/svg" class="h-7 w-7" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-              d="M4 8h16M4 16h16"/>
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 8h16M4 16h16"/>
       </svg>
     </button>
 
     <!-- Navigation Menu -->
     <nav
-      [ngClass]="{'hidden': !menuOpen, 'flex': menuOpen, 'lg:flex': true}"
-      class="flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-6 text-sm font-medium text-gray-700 absolute lg:static top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent px-6 py-4 lg:p-0 shadow-md lg:shadow-none"
-    >
-      <a routerLink="/" class="hover:text-[#8A1538] transition">Home</a>
-      <a routerLink="/#features" class="hover:text-[#8A1538] transition">Features</a>
-      <a routerLink="/#how" class="hover:text-[#8A1538] transition">How It Works</a>
-      <a routerLink="/#pricing" class="hover:text-[#8A1538] transition">Pricing</a>
-      <a routerLink="/#faq" class="hover:text-[#8A1538] transition">FAQs</a>
-            <a href="Auth/login"
-         class="border-1 border-[#8A1538] text-[#8A1538] px-4 py-2 rounded-lg  transition text-center">Login</a>
-      <a href="Auth/register"
-         class="bg-[#8A1538] text-white px-4 py-2 rounded-lg hover:bg-[#74122F] transition text-center">Get
-        Started</a>
-    </nav>
+  [ngClass]="{'hidden': !menuOpen, 'flex': menuOpen, 'lg:flex': true}"
+  class="flex-col lg:flex-row lg:items-center space-y-4 lg:space-y-0 lg:space-x-6 text-sm font-medium text-gray-700 absolute lg:static top-full left-0 w-full lg:w-auto bg-white lg:bg-transparent px-6 py-4 lg:p-0 shadow-md lg:shadow-none"
+>
+  <a href="#" (click)="scrollToSection('home'); $event.preventDefault()" class="hover:text-[#8A1538] transition">Home</a>
+
+  <!-- Fragment links with manual scroll -->
+  <a href="#" (click)="scrollToSection('features'); $event.preventDefault()" class="hover:text-[#8A1538] transition">Features</a>
+  <a href="#" (click)="scrollToSection('how'); $event.preventDefault()" class="hover:text-[#8A1538] transition">How It Works</a>
+  <a href="#" (click)="scrollToSection('pricing'); $event.preventDefault()" class="hover:text-[#8A1538] transition">Pricing</a>
+  <a href="#" (click)="scrollToSection('faq'); $event.preventDefault()" class="hover:text-[#8A1538] transition">FAQs</a>
+
+  <a routerLink="/Auth/login" class="border border-[#8A1538] text-[#8A1538] px-4 py-2 rounded-lg transition text-center">Login</a>
+  <a routerLink="/Auth/register" class="bg-[#8A1538] text-white px-4 py-2 rounded-lg hover:bg-[#74122F] transition text-center">Get Started</a>
+</nav>
   </div>
 </header>
 
-<!-- Spacer -->
-<div class="h-20"></div>
+<div class="h-20"></div> <!-- Spacer -->
 
-
-<!-- Spacer to prevent content hiding behind fixed header -->
-<div class="h-20"></div>
-
-<!-- Hero Section with Enhanced Animations -->
-<section class="min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center text-center px-4 py-24 relative overflow-hidden" style="background-image: url('assets/images/hero-bg.jpg');">
+<!-- Hero Section -->
+<section id="home" class="min-h-screen bg-cover bg-center bg-no-repeat flex items-center justify-center text-center px-4 py-24 relative overflow-hidden" style="background-image: url('assets/images/hero-bg.jpg');">
   <div class="absolute inset-0 bg-gradient-to-br from-[#8A1538]/90 to-[#74122F]/90 z-0 animate-fade-in"></div>
   <div class="relative z-10 text-white max-w-2xl animate-slide-up delay-100">
     <h1 class="text-6xl font-extrabold mb-4 tracking-tight drop-shadow-md">HyperMenu</h1>
     <p class="text-2xl mb-6 text-white/90">Smart QR Menus for Smart Restaurants</p>
-    <a href="Auth/register" class="bg-white text-[#8A1538] hover:text-[#74122F] px-6 py-3 rounded-xl font-semibold transition-transform hover:scale-105 shadow-lg">Explore Features</a>
+    <a routerLink="/Auth/register" class="bg-white text-[#8A1538] hover:text-[#74122F] px-6 py-3 rounded-xl font-semibold transition-transform hover:scale-105 shadow-lg">Explore Features</a>
   </div>
 </section>
 
 <!-- About Section -->
 <section class="bg-white py-20 px-6 text-center animate-fade-in">
   <h2 class="text-4xl font-bold mb-6">About Us</h2>
-  <p class="max-w-3xl mx-auto text-gray-600 text-lg">HyperMenu is a modern digital solution to manage restaurant menus, branches, and customer orders through smart QR codes.</p>
+  <p class="max-w-3xl mx-auto text-gray-600 text-lg">
+    HyperMenu is a modern digital solution to manage restaurant menus, branches, and customer orders through smart QR codes.
+  </p>
 </section>
 
 <!-- Features Section -->
@@ -159,15 +155,16 @@
 <section class="bg-gradient-to-r from-[#8A1538] to-[#74122F] text-white text-center py-20 px-6">
   <h2 class="text-4xl font-bold mb-6">Ready to Transform Your Restaurant?</h2>
   <p class="mb-8 text-lg">Start your free trial or request a live demo today.</p>
-  <a href="/auth/register" class="bg-white text-[#8A1538] px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition">Get Started</a>
+  <a routerLink="/Auth/register" class="bg-white text-[#8A1538] px-8 py-3 rounded-xl font-semibold hover:bg-gray-100 transition">Get Started</a>
 </section>
 
 <!-- Footer -->
 <footer class="bg-black text-gray-400 py-10 text-center text-sm">
   <p>&copy; 2025 HyperMenu. All rights reserved.</p>
   <div class="mt-4 space-x-6">
-    <a href="#" class="hover:text-white">Privacy</a>
-    <a href="#" class="hover:text-white">Terms</a>
+<a href="/privacy-policy" target="_blank" rel="noopener" class="hover:text-white">Privacy</a>
+<a href="/terms-and-conditions" target="_blank" rel="noopener" class="hover:text-white">Terms</a>
+
     <a href="mailto:info@hypermenu.com" class="hover:text-white">Contact</a>
   </div>
 </footer>

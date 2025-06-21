@@ -106,9 +106,12 @@ export class BranchesComponent implements OnInit {
   uploadMenu(branchId : string){
     this.router.navigate([`Home/${branchId}/uploadMenu`]);
   }
-  viewMenu(branchId : string){
-    this.router.navigate([`Home/${branchId}/viewMenu`]);
-  }
+viewMenu(branchId: string) {
+  const url = this.router.serializeUrl(
+    this.router.createUrlTree([`/Home/${branchId}/viewMenu`])
+  );
+  window.open(url, '_blank');
+}
   viewBranchIssues(branchId : string){
     this.router.navigate([`Admin/home/${branchId}/viewIssues`]);
   }

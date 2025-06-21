@@ -1,3 +1,11 @@
+import {jwtDecode} from 'jwt-decode';
+
+interface JwtPayload {
+  role?: string | string[];
+  roles?: string[];
+  [key: string]: any;
+}
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
@@ -31,7 +39,7 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  onLogin(): void {
+onLogin(): void {
     if (this.loginForm.invalid) return;
 
     this.isLoading = true;
@@ -43,9 +51,31 @@ export class LoginComponent implements OnInit {
         this.isLoading = false;
         this.successMessage = 'Logged in successfully!';
         this.loginForm.reset();
-        localStorage.setItem('token', res.token); 
-        console.log(res.token);
-        this.router.navigate(['Home/dashboard']);
+
+        localStorage.setItem('token', res.token);
+
+        const decoded = jwtDecode(res.token) as JwtPayload;
+
+        let roles: string[] = [];
+
+        if (decoded.role) {
+          roles = Array.isArray(decoded.role) ? decoded.role : [decoded.role];
+        } else if (decoded.roles) {
+          roles = decoded.roles;
+        }
+
+        else if (decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role']) {
+          const claimRole = decoded['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+          roles = Array.isArray(claimRole) ? claimRole : [claimRole];
+        }
+
+        if (roles.includes('SuperAdmin')) {
+          this.router.navigate(['Admin/dashboard']);
+        } else if (roles.includes('Admin')) {
+          this.router.navigate(['Home/dashboard']);
+        } else {
+          this.router.navigate(['/']);
+        }
       },
       error: (err) => {
         this.isLoading = false;
@@ -56,4 +86,5 @@ export class LoginComponent implements OnInit {
       },
     });
   }
+
 }

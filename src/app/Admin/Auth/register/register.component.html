@@ -17,79 +17,60 @@
 
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="space-y-5">
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Email</label>
-            <input type="email" formControlName="email" placeholder="you@example.com"
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-[#8A1538] shadow-sm" />
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Facility Name</label>
-            <input type="text" formControlName="facilityName" placeholder="Your Facility Name"
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-[#8A1538] shadow-sm" />
-          </div>
+        <!-- Step Indicator -->
+        <div class="flex justify-between items-center text-sm font-medium text-gray-700">
+          <div [ngClass]="{ 'text-[#8A1538] font-bold': currentStep === 1 }">1. Basic Info</div>
+          <div [ngClass]="{ 'text-[#8A1538] font-bold': currentStep === 2 }">2. Location</div>
+          <div [ngClass]="{ 'text-[#8A1538] font-bold': currentStep === 3 }">3. Business</div>
+          <div [ngClass]="{ 'text-[#8A1538] font-bold': currentStep === 4 }">4. Owner</div>
+          <div [ngClass]="{ 'text-[#8A1538] font-bold': currentStep === 5 }">5. Media</div>
+          <div [ngClass]="{ 'text-[#8A1538] font-bold': currentStep === 6 }">6. Features</div>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Password</label>
-            <input type="password" formControlName="password" placeholder="••••••"
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-[#8A1538] shadow-sm" />
+        <!-- Step Content -->
+        <ng-container [ngSwitch]="currentStep">
+          <div *ngSwitchCase="1">
+            <app-step-basic-info [form]="signupForm"></app-step-basic-info>
           </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Mobile Number</label>
-            <input type="tel" formControlName="mobileNumber" placeholder="+962..."
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-[#8A1538] shadow-sm" />
+          <div *ngSwitchCase="2">
+            <app-step-location [form]="signupForm"></app-step-location>
           </div>
+          <div *ngSwitchCase="3">
+            <app-step-business [form]="signupForm"></app-step-business>
+          </div>
+          <div *ngSwitchCase="4">
+            <app-step-owner [form]="signupForm"></app-step-owner>
+          </div>
+          <div *ngSwitchCase="5">
+            <app-step-media [form]="signupForm" (logoChange)="onLogoSelected($event)" (photosChange)="onPhotosSelected($event)"></app-step-media>
+          </div>
+          <div *ngSwitchCase="6">
+            <app-step-additional-features [form]="signupForm"></app-step-additional-features>
+          </div>
+        </ng-container>
+
+        <!-- Navigation Buttons -->
+        <div class="flex justify-between mt-6">
+          <button type="button" (click)="prevStep()" [disabled]="currentStep === 1"
+            class="px-6 py-2 rounded-md bg-gray-300 text-gray-700">Back</button>
+          <button *ngIf="currentStep < totalSteps" type="button" (click)="nextStep()"
+            class="px-6 py-2 rounded-md bg-[#8A1538] text-white hover:bg-[#74122F]">Next</button>
+          <button *ngIf="currentStep === totalSteps" type="submit"
+            class="px-6 py-2 rounded-md bg-green-600 text-white hover:bg-green-700"
+            [disabled]="signupForm.invalid || isLoading">
+            <span *ngIf="!isLoading">Submit</span>
+            <span *ngIf="isLoading">Submitting...</span>
+          </button>
         </div>
 
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Facility Type</label>
-            <select formControlName="facilityType"
-              class="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-[#8A1538] shadow-sm">
-              <option value="">Select facility type</option>
-              <option value="food-shop">🍽️ Food Shop</option>
-              <option value="coffee-shop">☕ Coffee Shop</option>
-              <option value="drive-thru">🚗 Drive Thru</option>
-            </select>
-          </div>
-          <div>
-            <label class="block text-sm font-medium text-gray-700 mb-1">Facility Image</label>
-            <input type="file" (change)="onFileSelected($event)" accept="image/*"
-              class="w-full file:px-4 file:py-2 file:border-0 file:rounded-md file:bg-[#8A1538] file:text-white hover:file:bg-[#74122F] text-sm" />
-            <p *ngIf="fileError" class="text-red-500 text-xs mt-1">{{ fileError }}</p>
-          </div>
-        </div>
-
-        <div>
-          <label class="block text-sm font-medium text-gray-700 mb-1">Facility Info</label>
-          <textarea formControlName="facilityInfo" rows="3" placeholder="Short description..."
-            class="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-[#8A1538] shadow-sm"></textarea>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-          <input type="url" formControlName="facilityFacebook" placeholder="Facebook URL"
-            class="px-4 py-3 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-[#8A1538] shadow-sm" />
-          <input type="url" formControlName="facilityInstagram" placeholder="Instagram URL"
-            class="px-4 py-3 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-[#8A1538] shadow-sm" />
-
-        </div>
-
-        <button type="submit"
-          class="w-full py-3 mt-2 bg-[#8A1538] text-white rounded-xl font-semibold hover:bg-[#74122F] transition duration-300 shadow-lg"
-          [disabled]="signupForm.invalid || isLoading">
-          <span *ngIf="!isLoading">Sign Up</span>
-          <span *ngIf="isLoading">Signing Up...</span>
-        </button>
-
+        <!-- Error / Success -->
         <p *ngIf="errorMessage" class="text-red-500 text-sm text-center mt-2">{{ errorMessage }}</p>
         <p *ngIf="successMessage" class="text-green-500 text-sm text-center mt-2">{{ successMessage }}</p>
 
         <p class="text-xs text-gray-500 text-center mt-4">
           By signing up, you agree to our
-          <a href="#" class="underline hover:text-gray-700">Terms</a> and
-          <a href="#" class="underline hover:text-gray-700">Privacy Policy</a>.
+          <a href="terms-and-conditions" target="_blank" class="underline text-[#8A1538]">Terms</a> and
+          <a href="privacy-policy" target="_blank" class="underline text-[#8A1538]">Privacy Policy</a>.
         </p>
 
       </form>

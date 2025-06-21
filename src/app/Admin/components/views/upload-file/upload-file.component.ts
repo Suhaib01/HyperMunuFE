@@ -5,6 +5,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { HttpEventType } from '@angular/common/http';
 import { FilesService } from '../../../../../services/file-service/files.service';
+import { IdService } from '../../../../../services/idNumbers-service/id.service';
 
 
 @Component({
@@ -29,10 +30,11 @@ export class UploadFileComponent {
   isDragOver: boolean = false;
   fileToUpload: File | null = null;
 
+  facilityId: string | null = null;
   branchId: string | null = null;
-
-  constructor(private fileService: FilesService, private router: Router, private activatedRoute: ActivatedRoute) {
-    this.branchId = this.activatedRoute.snapshot.paramMap.get('branchId');
+  constructor(private fileService: FilesService, private router: Router, private activatedRoute: ActivatedRoute, idService : IdService) {
+    this.facilityId = idService.getFacilityId();
+    this.branchId = activatedRoute.snapshot.paramMap.get("branchId")
   }
 
   // Handle file selection (either through input or drag-drop)
@@ -141,6 +143,6 @@ export class UploadFileComponent {
     this.fileURL = ''; 
     this.fileType = '';
     this.fileToUpload = null;
-    this.router.navigate(['/Home/dashboard']);
+    this.router.navigate([`/Home/${this.facilityId}/branches`]);
   }
 }

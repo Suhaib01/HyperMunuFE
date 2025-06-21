@@ -1,0 +1,65 @@
+<div [formGroup]="form">
+  <h3 class="text-lg font-semibold text-[#8A1538] mb-4">Business Details</h3>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Seating Capacity</label>
+      <input type="number" formControlName="seatingCapacity" placeholder="e.g. 50"
+        class="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-[#8A1538] shadow-sm" />
+      <p *ngIf="form.get('seatingCapacity')?.invalid && (form.get('seatingCapacity')?.touched || form.get('seatingCapacity')?.dirty)"
+         class="text-red-500 text-xs mt-1">
+        Seating Capacity is required.
+      </p>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Cuisine Type / Specialties</label>
+      <input type="text" formControlName="cuisineType" placeholder="e.g. Italian, Asian"
+        class="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-[#8A1538] shadow-sm" />
+      <p *ngIf="form.get('cuisineType')?.invalid && (form.get('cuisineType')?.touched || form.get('cuisineType')?.dirty)"
+         class="text-red-500 text-xs mt-1">
+        Cuisine Type is required.
+      </p>
+    </div>
+
+    <div>
+      <label class="block text-sm font-medium text-gray-700 mb-1">Price Range</label>
+      <input type="number" formControlName="priceRange" placeholder="e.g. $, $$, $$$"
+        class="w-full px-4 py-3 border border-gray-300 rounded-xl text-sm focus:ring-2 focus:ring-[#8A1538] shadow-sm" />
+      <p *ngIf="form.get('priceRange')?.invalid && (form.get('priceRange')?.touched || form.get('priceRange')?.dirty)"
+         class="text-red-500 text-xs mt-1">
+        Price Range is required.
+      </p>
+    </div>
+  </div>
+
+<div class="mt-4 text-gray-700">
+  <div *ngIf="serviceOptionsGroup" [formGroup]="serviceOptionsGroup" class="grid grid-cols-2 md:grid-cols-4 gap-4">
+    <label class="flex items-center gap-2 cursor-pointer select-none">
+      <input type="checkbox" formControlName="dineIn" class="w-5 h-5 rounded border-gray-300 text-[#8A1538] focus:ring-[#8A1538]" />
+      <span>Dine-in</span>
+    </label>
+
+    <label class="flex items-center gap-2 cursor-pointer select-none">
+      <input type="checkbox" formControlName="takeaway" class="w-5 h-5 rounded border-gray-300 text-[#8A1538] focus:ring-[#8A1538]" />
+      <span>Takeaway</span>
+    </label>
+
+    <label class="flex items-center gap-2 cursor-pointer select-none">
+      <input type="checkbox" formControlName="delivery" class="w-5 h-5 rounded border-gray-300 text-[#8A1538] focus:ring-[#8A1538]" />
+      <span>Delivery</span>
+    </label>
+
+    <label class="flex items-center gap-2 cursor-pointer select-none">
+      <input type="checkbox" formControlName="catering" class="w-5 h-5 rounded border-gray-300 text-[#8A1538] focus:ring-[#8A1538]" />
+      <span>Catering</span>
+    </label>
+  </div>
+
+  <p *ngIf="form.get('serviceOptions')?.errors?.['atLeastOneRequired'] && (form.get('serviceOptions')?.touched || form.get('serviceOptions')?.dirty)"
+    class="text-red-500 text-xs mt-2">
+    Please select at least one service option.
+  </p>
+</div>
+
+</div>

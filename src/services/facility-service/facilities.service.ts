@@ -24,7 +24,18 @@ export class FacilitiesService {
     withCredentials: false 
   });
   }
+getAllClients(): Observable<any> {
 
+     const token = localStorage.getItem('token');
+     const headers = new HttpHeaders({
+      Authorization: `Bearer ${token}`
+  });  
+
+    return this.http.get<any>(`${this.baseUrl}/Admin/getAllClients`, {
+    headers: headers,
+    withCredentials: false 
+  });
+}
   deleteFacility(facilityId: string): Observable<any> {
     return this.http.delete<any>(`${this.baseUrl}/facility/${facilityId}/delete`);
   }

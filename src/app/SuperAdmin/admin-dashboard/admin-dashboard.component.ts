@@ -1,32 +1,33 @@
-import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { FacilitiesService } from '../../../services/facility-service/facilities.service';
-import { environment } from '../../../environments/environment';
-import { CreateFacilityDialogComponent } from '../components/dialogs/create-facility-dialog/create-facility-dialog.component';
+import { Router } from '@angular/router';
 import { MatDialog } from '@angular/material/dialog';
-import { JsonToArrayPipe } from '../../SuperAdmin/json-to-array.pipe';
+import { CreateFacilityDialogComponent } from '../../Admin/components/dialogs/create-facility-dialog/create-facility-dialog.component';
+import { CommonModule } from '@angular/common';
+import { BranchesService } from '../../../services/branch-service/branches.service';
+import { JsonToArrayPipe } from '../json-to-array.pipe';
 
 @Component({
-  selector: 'app-dashboard',
+  selector: 'app-admin-dashboard',
   imports: [CommonModule,JsonToArrayPipe],
-  templateUrl: './dashboard.component.html',
-  styleUrl: './dashboard.component.scss'
+  templateUrl: './admin-dashboard.component.html',
+  styleUrl: './admin-dashboard.component.scss'
 })
-export class DashboardComponent {
+export class AdminDashboardComponent {
   facilities: any[] = [];
   isLoading: boolean = true;
-
- constructor(private facilityService: FacilitiesService, private router : Router,private dialog: MatDialog) {}
+ branches: any[] = [];
+ constructor(private facilityService: FacilitiesService, private router : Router,private dialog: MatDialog,private branchesService: BranchesService) {}
 ngOnInit(): void {
     this.fetchFacilities();
     
   }
 
 fetchFacilities(): void {
-    this.facilityService.getAllFacilities().subscribe({
+    this.facilityService.getAllClients().subscribe({
       next: (res) => {
         this.facilities = res;
+        console.log(res);
         this.isLoading = false;
       },
       error: (err) => {
@@ -62,7 +63,19 @@ fetchFacilities(): void {
     
   manageFacility(facilityId: string): void {
   
-  this.router.navigate([`Home/${facilityId}/branches`]);
+    this.branchesService.getAllBranches(facilityId).subscribe({
+      next: (res) => {
+        this.branches = res;
+        this.isLoading = false;
+        console.log(this.branches)
+      },
+      error: (err) => {
+        console.error('Error fetching facilities:', err);
+        this.branches = [];
+        this.isLoading = false;
+      }
+    });
+  
     
   }
 }

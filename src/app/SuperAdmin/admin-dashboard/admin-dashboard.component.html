@@ -1,0 +1,93 @@
+<main class="p-4 sm:p-6 space-y-6 mt-4 sm:mt-6">
+  <div class="max-w-4xl mx-auto bg-white p-4 sm:p-6 shadow-md rounded-lg">
+    <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center space-y-4 sm:space-y-0">
+      <div>
+        <h1 class="text-2xl sm:text-3xl font-semibold text-gray-800">Clients</h1>
+      </div>
+    </div>
+
+    <div class="mt-6 w-full">
+      <div *ngIf="isLoading" class="text-center text-gray-600">Loading...</div>
+      <div *ngIf="!isLoading && facilities === null" class="text-center text-gray-500">No facilities found.</div>
+
+      <div *ngIf="!isLoading" class="grid grid-cols-1 gap-6">
+        <div *ngFor="let facility of facilities"
+             class="bg-white shadow-lg rounded-xl p-4 border border-gray-200 transition duration-300 hover:shadow-xl">
+          
+          <!-- Top Section -->
+          <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+            <div class="flex items-center gap-4">
+              <img [src]="facility.logoUrl" alt="{{facility.name}} logo" class="w-14 h-14 rounded-xl object-cover" />
+              <div>
+                <h3 class="text-lg font-semibold text-[#8A1538]">{{ facility.name }}</h3>
+                <p class="text-gray-700 text-sm capitalize">{{ facility.facilityType }}</p>
+              </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2 justify-start sm:justify-end">
+              <button (click)="editFacility(facility, facility._id , $event)"
+                      class="flex items-center text-blue-600 hover:text-blue-800 px-3 py-1 rounded border border-blue-500 hover:bg-blue-100 transition">
+                <i class="ri-edit-line mr-1"></i> Edit
+              </button>
+              <button (click)="manageFacility(facility.id)"
+                      class="flex items-center text-green-600 hover:text-green-800 px-3 py-1 rounded border border-green-500 hover:bg-green-100 transition">
+                <i class="ri-settings-3-line mr-1"></i> Branches
+              </button>
+            </div>
+          </div>
+
+          <!-- Additional Info: Show All Props -->
+          <div class="mt-4 text-sm text-gray-700 space-y-1">
+            <p><strong>Description:</strong> {{ facility.description }}</p>
+            <p><strong>Phone:</strong> {{ facility.mobileNumber }}</p>
+            <p><strong>Email:</strong> {{ facility.email }}</p>
+            <p><strong>Facility Website:</strong> {{ facility.facilityWebsite }}</p>
+            <p><strong>Address:</strong> {{ facility.streetAddress }}, {{ facility.city }}, {{ facility.state }}, {{ facility.postalCode }}, {{ facility.country }}</p>
+            <p><strong>Coordinates:</strong> {{ facility.latitude }}, {{ facility.longitude }}</p>
+            <p><strong>Seating Capacity:</strong> {{ facility.seatingCapacity }}</p>
+            <p><strong>Cuisine Type:</strong> {{ facility.cuisineType }}</p>
+            <p><strong>Price Range:</strong> {{ facility.priceRange }}</p>
+            <p><strong>Services:</strong> 
+              <span *ngIf="facility.dineIn">Dine In, </span>
+              <span *ngIf="facility.takeaway">Takeaway, </span>
+              <span *ngIf="facility.delivery">Delivery, </span>
+              <span *ngIf="facility.catering">Catering</span>
+            </p>
+            <p><strong>Owner Name:</strong> {{ facility.ownerName }}</p>
+            <p><strong>Manager Name:</strong> {{ facility.managerName }}</p>
+            <p><strong>Emergency Contact:</strong> {{ facility.emergencyContact }}</p>
+            <p><strong>Facilities:</strong> 
+              <span *ngIf="facility.wifi">Wifi, </span>
+              <span *ngIf="facility.parking">Parking, </span>
+              <span *ngIf="facility.outdoorSeating">Outdoor Seating, </span>
+              <span *ngIf="facility.accessible">Accessible</span>
+            </p>
+            <p><strong>Dietary Options:</strong>
+              <span *ngIf="facility.halal">Halal, </span>
+              <span *ngIf="facility.vegetarianOptions">Vegetarian, </span>
+              <span *ngIf="facility.veganOptions">Vegan</span>
+            </p>
+            <p><strong>Allergen Info Available:</strong> {{ facility.allergenInfo ? 'Yes' : 'No' }}</p>
+
+            <p><strong>Social Links:</strong>
+              <a *ngIf="facility.facilityFacebook" href="{{facility.facilityFacebook}}" target="_blank" class="text-blue-600 hover:underline">Facebook</a> | 
+              <a *ngIf="facility.facilityInstgram" href="{{facility.facilityInstgram}}" target="_blank" class="text-pink-600 hover:underline">Instagram</a>
+            </p>
+
+            <p><strong>Created At:</strong> {{ facility.createdAt | date:'medium' }}</p>
+
+            <!-- If you want to show photos -->
+            <div *ngIf="facility.photoUrlsJson">
+              <strong>Photos:</strong>
+              <div class="flex gap-2 mt-1 flex-wrap">
+                <img *ngFor="let photoUrl of (facility.photoUrlsJson | jsonToArray)" [src]="photoUrl" alt="Photo" class="w-20 h-20 object-cover rounded" />
+              </div>
+            </div>
+
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</main>

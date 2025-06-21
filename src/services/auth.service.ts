@@ -32,7 +32,7 @@ getUser(): Observable<any> {
   const headers = new HttpHeaders({
     Authorization: `Bearer ${token}`
   });
-console.log(headers);
+
   return this.http.get(`${this.authUrl}/auth/getUser`, {
     headers: headers,
     withCredentials: false // usually false for JWT; set true only if you use cookies

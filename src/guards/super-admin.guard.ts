@@ -2,7 +2,7 @@ import { CanActivateFn, Router } from '@angular/router';
 import { inject } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 
-export const adminGuard: CanActivateFn = (route, state) => {
+export const superAdminGuard: CanActivateFn = (route, state) => {
   const authService = inject(AuthService);
   const router = inject(Router);
 
@@ -15,7 +15,7 @@ export const adminGuard: CanActivateFn = (route, state) => {
   try {
     const payload = JSON.parse(atob(token.split('.')[1]));
     const role = payload['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-    if (role === 'Admin') {
+    if (role === 'SuperAdmin') {
       return true;
     } else {
       router.navigate(['Auth/login']);
