@@ -32,6 +32,14 @@ export class RegisterComponent {
   successMessage = '';
   currentStep = 1;
   totalSteps = 6;
+steps = [
+  'Basic Info',
+  'Location',
+  'Business',
+  'Owner',
+  'Media',
+  'Features'
+];
 
   constructor(private fb: FormBuilder, private authService: AuthService, private router: Router) {
     this.signupForm = this.fb.group({

@@ -18,14 +18,45 @@
       <form [formGroup]="signupForm" (ngSubmit)="onSubmit()" class="space-y-5">
 
         <!-- Step Indicator -->
-        <div class="flex justify-between items-center text-sm font-medium text-gray-700">
-          <div [ngClass]="{ 'text-[#8A1538] font-bold': currentStep === 1 }">1. Basic Info</div>
-          <div [ngClass]="{ 'text-[#8A1538] font-bold': currentStep === 2 }">2. Location</div>
-          <div [ngClass]="{ 'text-[#8A1538] font-bold': currentStep === 3 }">3. Business</div>
-          <div [ngClass]="{ 'text-[#8A1538] font-bold': currentStep === 4 }">4. Owner</div>
-          <div [ngClass]="{ 'text-[#8A1538] font-bold': currentStep === 5 }">5. Media</div>
-          <div [ngClass]="{ 'text-[#8A1538] font-bold': currentStep === 6 }">6. Features</div>
-        </div>
+<!-- Step Indicator -->
+<!-- Modern Step Indicator -->
+<div class="flex items-center justify-between overflow-x-auto no-scrollbar mb-6 gap-4">
+  <ng-container *ngFor="let step of steps; let i = index">
+    <div class="flex items-center space-x-2 min-w-[100px]">
+      <!-- Step Circle -->
+      <div
+        class="w-8 h-8 rounded-full flex items-center justify-center text-sm border-2 transition-all duration-300"
+        [ngClass]="{
+          'bg-[#8A1538] text-white border-[#8A1538]': currentStep === i + 1,
+          'bg-white text-[#8A1538] border-[#8A1538]': currentStep > i + 1,
+          'bg-gray-200 text-gray-500 border-gray-300': currentStep < i + 1
+        }">
+        {{ i + 1 }}
+      </div>
+
+      <!-- Step Label -->
+      <div
+        class="text-xs sm:text-sm font-medium transition-all duration-300 whitespace-nowrap"
+        [ngClass]="{
+          'text-[#8A1538] font-semibold': currentStep === i + 1,
+          'text-gray-500': currentStep !== i + 1
+        }">
+        {{ step }}
+      </div>
+    </div>
+
+    <!-- Connector Line -->
+    <div
+      *ngIf="i < steps.length - 1"
+      class="flex-1 h-0.5 transition-all duration-300"
+      [ngClass]="{
+        'bg-[#8A1538]': currentStep > i + 1,
+        'bg-gray-300': currentStep <= i + 1
+      }"></div>
+  </ng-container>
+</div>
+
+
 
         <!-- Step Content -->
         <ng-container [ngSwitch]="currentStep">
